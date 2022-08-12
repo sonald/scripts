@@ -42,7 +42,9 @@ usersBucketDF = spark.table("Users")
 print(f"orders :#{usersBucketDF.count()}")
 
 # joined = ordersBucketDF.join(usersBucketDF, usersBucketDF["uid"] == ordersBucketDF["user_id"])
-joined = spark.sql('select *, users.* from orders join users on users.uid == orders.user_id')
+joined = spark.sql("""
+    select /*+ MERGE(orders, users) */ *, users.* from orders join users on users.uid == orders.user_id
+""")
 print(f"count = {joined.count()}")
 joined.show()
 joined.explain()
