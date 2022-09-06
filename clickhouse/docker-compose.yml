@@ -1,0 +1,19 @@
+version: '2'
+networks:
+  proxy-network:
+    name: bigdata
+services:
+  CH:
+    image: clickhouse/clickhouse-server
+    user: '1002:1002'
+    networks:
+      - proxy-network
+    ports:
+      - 19000:9000
+      - 8123:8123
+    volumes:
+      - ./vols/ch-data:/var/lib/clickhouse
+      - ./vols/ch-log:/var/log/clickhouse-server
+    ulimits:
+      nofile: 262144
+
