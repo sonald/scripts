@@ -12,7 +12,8 @@ if [ ! -f pyspark_env.tar.gz ]; then
 fi
 
 job=$1
-PKGS=io.delta:delta-core_2.12:2.0.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0
+PKGS=io.delta:delta-core_2.12:2.0.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0,com.github.housepower:clickhouse-spark-runtime-3.3_2.12:0.5.0,com.clickhouse:clickhouse-jdbc:0.3.2-patch11:all
+
 #docker-compose exec \
     #-e PYSPARK_DRIVER_PYTHON=python -e PYSPARK_PYTHON=./environment/bin/python \
     #spark-master spark-submit --packages $PKGS \
