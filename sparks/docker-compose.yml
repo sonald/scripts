@@ -22,7 +22,7 @@ services:
       resources:
         limits:
           cpus: '4'
-          memory: 8G
+          memory: 16G
 
   spark-worker:
     image: bitnami/spark:3.3
@@ -30,18 +30,18 @@ services:
       - ./:/jobs
     deploy:
       mode: replicated
-      replicas: 3
+      replicas: 2
       resources:
         limits:
-          cpus: '3'
-          memory: 8G
+          cpus: '4'
+          memory: 16G
     depends_on:
       - spark-master
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_CORES=2
-      - SPARK_WORKER_MEMORY=8g
+      - SPARK_WORKER_CORES=4
+      - SPARK_WORKER_MEMORY=16g
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no

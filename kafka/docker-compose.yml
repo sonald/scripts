@@ -12,7 +12,7 @@ services:
       - 2181:2181
     hostname: zk1
     volumes:
-      - ./vols/zk_data:/data
+      - /data/vols/zk_data:/data
     environment:
       - ZOO_MY_ID=1
       - ZOO_SERVERS=server.1=zk1:2888:3888;2181 server.2=zk2:2888:3888;2181 server.3=zk3:2888:3888;2181
@@ -23,7 +23,7 @@ services:
       - proxy-network
     hostname: zk2
     volumes:
-      - ./vols/zk_data2:/data
+      - /data/vols/zk_data2:/data
     environment:
       - ZOO_MY_ID=2
       - ZOO_SERVERS=server.1=zk1:2888:3888;2181 server.2=zk2:2888:3888;2181 server.3=zk3:2888:3888;2181
@@ -34,7 +34,7 @@ services:
       - proxy-network
     hostname: zk3
     volumes:
-      - ./vols/zk_data3:/data
+      - /data/vols/zk_data3:/data
     environment:
       - ZOO_MY_ID=3
       - ZOO_SERVERS=server.1=zk1:2888:3888;2181 server.2=zk2:2888:3888;2181 server.3=zk3:2888:3888;2181
@@ -43,8 +43,6 @@ services:
     image: confluentinc/cp-kafka:latest
     networks:
       - proxy-network
-    volumes:
-      - ./vols/kafka_data:/var/lib/kafka/data
     ports:
       - 9092:9092
     environment:
@@ -63,8 +61,6 @@ services:
     image: confluentinc/cp-kafka:latest
     networks:
       - proxy-network
-    volumes:
-      - ./vols/kafka2_data:/var/lib/kafka/data
     ports:
       - 9093:9093
     environment:

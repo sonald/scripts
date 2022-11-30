@@ -12,9 +12,14 @@ services:
       - 19100:9100
       - 8123:8123
     volumes:
-      #- /data/sonald/vols/ch-data:/var/lib/clickhouse
-      #- /data/sonald/vols/ch-log:/var/log/clickhouse-server
       - ./config.xml:/etc/clickhouse-server/config.xml
+      - /data/vols/ch-data:/var/lib/clickhouse
+      - /data/vols/ch-log:/var/log/clickhouse-server
     ulimits:
       nofile: 262144
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 32G
 
