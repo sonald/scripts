@@ -5,15 +5,16 @@ networks:
 services:
   CH:
     image: clickhouse/clickhouse-server
-    user: '1002:1002'
     networks:
       - proxy-network
     ports:
       - 19000:9000
+      - 19100:9100
       - 8123:8123
     volumes:
-      - ./vols/ch-data:/var/lib/clickhouse
-      - ./vols/ch-log:/var/log/clickhouse-server
+      #- /data/sonald/vols/ch-data:/var/lib/clickhouse
+      #- /data/sonald/vols/ch-log:/var/log/clickhouse-server
+      - ./config.xml:/etc/clickhouse-server/config.xml
     ulimits:
       nofile: 262144
 
